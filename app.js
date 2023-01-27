@@ -1,8 +1,8 @@
 /* Imports */
-import { getPosts } from './fetch.utils.js';
+import { getPosts, renderPosts } from './fetch.utils.js';
 
 /* Get DOM Elements */
-
+const mainEl = document.getElementById('main');
 /* State */
 let postsData = [];
 
@@ -15,29 +15,15 @@ window.addEventListener('load', async () => {
 
     postsData = posts;
     displayPosts();
-
-    
+});
 
 function displayPosts() {
     for (let post of postsData) {
-        const postEl = document.createElement('div');
-        const postTitleEl = document.createElement('p');
-        const postInfoEl = document.createElement('p');
-
-        postInfoEl.textContent = post.info;
-        postTitleEl.textContent = post.title;
-        postEl.append('postTitle', 'postInfo');
-
-        postEl.classList.add();
-        postTitleEl.classList.add;
-        postInfoEl.classList.add;
-        postEl.textContent = '';
-
-        return postEl;
+        const postEl = renderPosts(post);
+        mainEl.append(postEl);
     }
-};
-
 }
+
 //on load check if user is logged in and if So redirect them to home pageXOffset.toExponential
 
 //Submit the sign in Form.

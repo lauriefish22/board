@@ -39,3 +39,18 @@ export async function signOut() {
 
     return response.error;
 }
+
+export function renderPosts(post) {
+    const postEl = document.createElement('div');
+    const postTitleEl = document.createElement('p');
+    const postInfoEl = document.createElement('p');
+
+    postInfoEl.textContent = post.info;
+    postTitleEl.textContent = post.title;
+    postEl.append('postTitle', 'postInfo');
+
+    postEl.classList.add();
+    postTitleEl.classList.add;
+    postInfoEl.classList.add;
+    postEl.textContent = '';
+}
