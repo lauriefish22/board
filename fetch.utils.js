@@ -5,18 +5,23 @@ const SUPABASE_KEY =
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function getPosts() {
-    const { data, error } = await client.from('board').select('*');
+    const { data } = await client.from('board').select('*');
     console.log(data);
-    if (error) console.error(error);
-
     return data;
 }
+//export async function signIn(email, password)
+//const { data } = await supabase.auth.signInWithPassword({email: email,
+//password: password,
+//});
+//return data;
+//}
 
 export async function signIn(email, password) {
     const { data } = await client.auth.signIn({
         email: email,
         password: password,
     });
+    return data;
 }
 
 export async function signUp(email, password) {
@@ -24,12 +29,7 @@ export async function signUp(email, password) {
         email: email,
         password: password,
     });
-}
-
-export async function checkAuth() {
-    const user = await getUser();
-
-    if (!user) location.replace('/auth');
+    return data;
 }
 
 export async function redirectIfLoggedIn() {}
@@ -45,12 +45,28 @@ export function renderPosts(post) {
     const postTitleEl = document.createElement('p');
     const postInfoEl = document.createElement('p');
 
-    postInfoEl.textContent = post.info;
-    postTitleEl.textContent = post.title;
-    postEl.append('postTitle', 'postInfo');
+    postInfoEl.textContent = post.post_info;
+    postTitleEl.textContent = post.post_title;
 
-    postEl.classList.add();
-    postTitleEl.classList.add;
-    postInfoEl.classList.add;
-    postEl.textContent = '';
+    postEl.classList.add('post');
+    postTitleEl.classList.add('post_title');
+    postInfoEl.classList.add('post_info');
+
+    postEl.append(postTitleEl, postInfoEl);
+
+    return postEl;
+}
+
+export async function getUser() {
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    return user;
+}
+
+export function checkAuth() {
+    const user = getUser();
+
+    if (!user) location.replace('../');
 }

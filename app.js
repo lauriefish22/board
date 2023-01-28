@@ -2,7 +2,7 @@
 import { getPosts, renderPosts } from './fetch.utils.js';
 
 /* Get DOM Elements */
-const mainEl = document.getElementById('main');
+const displayEl = document.querySelector('.post-display');
 /* State */
 let postsData = [];
 
@@ -14,13 +14,14 @@ window.addEventListener('load', async () => {
     const posts = await getPosts();
 
     postsData = posts;
+
     displayPosts();
 });
 
 function displayPosts() {
     for (let post of postsData) {
         const postEl = renderPosts(post);
-        mainEl.append(postEl);
+        displayEl.append(postEl);
     }
 }
 
