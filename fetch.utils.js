@@ -6,7 +6,7 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function getPosts() {
     const { data } = await client.from('board').select('*');
-    console.log(data);
+
     return data;
 }
 //export async function signIn(email, password)
@@ -25,11 +25,12 @@ export async function signIn(email, password) {
 }
 
 export async function signUp(email, password) {
-    const { data } = await client.auth.signUp({
+    const response = await client.auth.signUp({
         email: email,
         password: password,
     });
-    return data;
+    if (response.error) return console.error(response.error);
+    return response.data;
 }
 
 export async function redirectIfLoggedIn() {}
