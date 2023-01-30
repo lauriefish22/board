@@ -3,6 +3,7 @@ import { getPosts, renderPosts } from './fetch.utils.js';
 
 /* Get DOM Elements */
 const displayEl = document.querySelector('.post-display');
+const loginButton = document.querySelector('#login');
 /* State */
 let postsData = [];
 
@@ -16,6 +17,10 @@ window.addEventListener('load', async () => {
     postsData = posts;
 
     displayPosts();
+});
+
+loginButton.addEventListener('click', () => {
+    window.location.href = './auth';
 });
 
 function displayPosts() {
